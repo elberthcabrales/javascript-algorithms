@@ -1,37 +1,38 @@
 class Stack {
   constructor() {
-    this.items = [];
+    this.items = []
     this.top = null;
+    this.min = Infinity;
   }
+  push(value){
+    this.items.push(value);
+    this.top = value;
 
-  size(){
-    return this.items.length;
+    return this.items;
   }
-
-  isEmpty(){
-    return this.items.length === 0
-  }
-
   getTop(){
     return this.top;
   }
-  //O(1)
-  push(element){
-    this.items.push(element);
-    this.top = element;
-  }
-  //O(1)
   pop(){
-    if(this.items.length !== 0) {
-      if (this.items.length === 1) {
-        this.top = null;
-        return this.items.pop();
-      } else {
-        this.top = this.items[this.items.length - 2];
-        return this.items.pop();
-      }
+    if(this.isEmpty()){
+      return null;
     }
-    return this.top;
+    if(this.items.length === 1){
+      this.top = null;
+      this.items.pop();
+      return null;
+    }
+    const newTop = this.items[this.items.length - 2];
+    this.items.pop();
+    this.top = newTop;
+
+    return this.items;
+  }
+  isEmpty(){
+    return this.items.length === 0;
+  }
+  size(){
+    return this.items.length;
   }
 }
 
@@ -42,7 +43,9 @@ myStack.push(2);
 myStack.push(3);
 myStack.push(4);
 myStack.push(5);
-console.log(myStack.getTop());
+myStack.push(-2);
+console.log(myStack.size()) // 6
+console.log(myStack.getTop()); // get -2
 console.log(myStack.pop());
 console.log(myStack.getTop());
 console.log(myStack.pop());
