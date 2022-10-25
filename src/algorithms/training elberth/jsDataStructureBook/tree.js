@@ -21,7 +21,7 @@ BinaryTree.prototype.traverseInOrderIterative = function () {
   while (!done) {
     // Reach the left most Node of the current Node
     if (current != null) {
-      // Place pointer to a tree node on the stacks
+      // Place pointer to a tree node on the stacksAndQueues
       // before traversing the node's left subtree
       s.push(current);
       current = current.left;
@@ -47,14 +47,14 @@ BinaryTree.prototype.traversePostOrder = function () {
 };
 
 BinaryTree.prototype.traversePostOrderIterative = function () {
-  // Create two stacks
+  // Create two stacksAndQueues
   const s1 = [];
   const s2 = [];
 
-  // Push root to first stacks
+  // Push root to first stacksAndQueues
   s1.push(this._root);
 
-  // # Run while first stacks is not empty
+  // # Run while first stacksAndQueues is not empty
   while (s1.length) {
     // Pop an item from s1 and append it to s2
     var node = s1.pop();
@@ -64,7 +64,7 @@ BinaryTree.prototype.traversePostOrderIterative = function () {
     if (node.left) s1.push(node.left);
     if (node.right) s1.push(node.right);
   }
-  // Print all eleements of second stacks
+  // Print all eleements of second stacksAndQueues
   while (s2.length) {
     var node = s2.pop();
     console.log(node.value);

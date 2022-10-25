@@ -29,9 +29,7 @@ class Stack {
       return top;
     }
     this.top = this.items[this.items.length - 2]
-    this.items.pop();
-
-    return this.top;
+    return this.items.pop();;
   }
 }
 
@@ -67,6 +65,10 @@ class proxyMinStack{
   }
 }
 
+module.exports = {
+  Stack,
+}
+/**
 let stack = new proxyMinStack();
 
 stack.push(5)
@@ -83,7 +85,8 @@ stack.pop()
 stack.pop()
 
 console.log("minimum value: " ,stack.min())
-/**
- * minimum value:  1
+
+
+  * minimum value:  1
  * minimum value:  2
  */
