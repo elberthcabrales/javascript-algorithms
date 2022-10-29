@@ -1,6 +1,6 @@
 const {Stack} = require('./Stack.js');
 
-function isBalanced(exp) {
+function isBalancedOther(exp) {
   const myStack = new Stack();
   //Iterate through the string exp
   for (let i = 0; i < exp.length; i++) {
@@ -28,11 +28,38 @@ function isBalanced(exp) {
   return true
 }
 
+const isBalanced = (str) => {
+  const stack = [] // use shift for last in first out (LIFO)
+  const closedCharters = { '>': '<', ']': '[', ')': '(', '}': '{' };
+
+  for(let i = 0; i < str.length; i++){
+    const char = closedCharters[str[i]];
+    if(char){
+      if(char != stack.pop()) return false
+    }else{
+      stack.push(str[i])
+    }
+  }
+
+  if(stack.length > 0) return false;
+  return true
+}
+
 
 let inputString = "{[()]}"
-console.log(inputString)
+console.log(isBalanced(inputString)) // true
+
+inputString = "<>[]"
+console.log(isBalanced(inputString)) // true
+
+inputString = "<>[]]" // false
 console.log(isBalanced(inputString))
 
-inputString = "{[([({))]}}"
-console.log(inputString)
+inputString = "{[([({))]}}" // false
+console.log(isBalanced(inputString))
+
+inputString = "({}{}{})[]" // true
+console.log(isBalanced(inputString))
+
+inputString = "({}{}{}){}]" // false
 console.log(isBalanced(inputString))

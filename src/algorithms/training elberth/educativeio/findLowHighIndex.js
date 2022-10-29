@@ -12,7 +12,7 @@ const findLowIndex = function (nums, target) {
       // Target value is greater than or equal to the middle value
       high = mid - 1;
     }
-    // Updating the mid value
+    // Updating the mid-value
     mid = low + Math.floor((high - low) / 2);
   }
 
@@ -37,7 +37,7 @@ const findHighIndex = function (nums, target) {
     else {
       high = mid - 1;
     }
-    // Updating the mid value
+    // Updating the mid-value
     mid = low + Math.floor((high - low) / 2);
   }
 

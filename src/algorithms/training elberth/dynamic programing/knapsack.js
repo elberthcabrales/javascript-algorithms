@@ -10,7 +10,7 @@ const knapsackAux = (weights, prices, capacity, index, memo) => {
     return memo[`${capacity}-${index}`];
   }
 
-  // whene weights is bigger than capacity, use the next element in array
+  // when weights is bigger than capacity, use the next element in array
   if (weights[index] > capacity) {
     memo[key] = knapsackAux(weights, prices, capacity, index + 1, memo);
     return memo[`${capacity}-${index}`];

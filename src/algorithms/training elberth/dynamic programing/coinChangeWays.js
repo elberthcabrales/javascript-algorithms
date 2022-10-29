@@ -7,6 +7,7 @@ function countWays(coins, n){
     for(let amount = 1; amount <= n; amount++){
       if(coin <= amount){
         dp[amount] += dp[amount - coin]
+        console.log(`${JSON.stringify(dp)} coin:${coin} amount:${amount}`)
       }
     }
   }
