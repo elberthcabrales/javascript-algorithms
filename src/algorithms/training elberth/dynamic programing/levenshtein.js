@@ -36,6 +36,7 @@ function levenshtein(a, b) {
   const sizeA = a.length;
   const sizeB = b.length;
 
+  //create matrix axb
   const dp = new Array(sizeA + 1);
   for (let i = 0; i < dp.length; i++) {
     dp[i] = new Array(sizeB + 1).fill(0);
@@ -48,19 +49,21 @@ function levenshtein(a, b) {
   for (let i = 1; i < dp.length; i++) {
     for (let j = 1; j < dp[i].length; j++) {
       if (a[i - 1] === b[j - 1]) {
-        dp[i][j] = dp[i - 1][j - 1];
+        dp[i][j] = dp[i - 1][j - 1]; // no cost
       }
-      if (a[i - 1] !== b[j - 1]) {
+      else{
+
         dp[i][j] = 1 + Math.min(
-          dp[i][j - 1],
-          dp[i - 1][j],
-          dp[i - 1][j - 1],
+          dp[i][j - 1], // insertion
+          dp[i - 1][j],  // deletion
+          dp[i - 1][j - 1], // substitution
         );
       }
     }
   }
+  console.log(dp);
   return dp[sizeA][sizeB];
 }
 
-const response = levenshtein('teh', 'the');
-console.log(response);
+const response = levenshtein('kitten', 'sitting');
+console.log(JSON.stringify(response));
