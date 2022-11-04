@@ -88,7 +88,7 @@ const heap = new maxHeap()
 const arr =  [2,8,15,5,1,20]
 heap.buildHeap(arr)
 console.log(heap.getMax())
-heap.insert(50)
+heap.insert(11)
 console.log(heap.getMax())
 
 heap.removeMax()

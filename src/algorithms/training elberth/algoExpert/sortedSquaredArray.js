@@ -24,19 +24,19 @@ function sortedSquaredArray(array) {
   const result = new Array(array.length).fill(0)
   let i = 0;
   let j = array.length - 1;
-
-  while(array.length > i && i <= j){
-    if(Math.abs(array[i]) < Math.abs(array[j])){
-      result[j] = array[j] * array[j]
+  let position = array.length - 1;
+  while(i <= j){
+    if(Math.abs(array[j]) > Math.abs(array[i])){
+      result[position] = array[j] * array[j]
       j--
     }else{
-      result[j] =  array[i] * array[i]
+      result[position] =  array[i] * array[i]
       i++
     }
+    position--;
   }
   return result;
 }
-
 const input = [-3, -2, -1, 9];
 const expected = [1, 4, 9, 81];
 const actual = sortedSquaredArray(input);

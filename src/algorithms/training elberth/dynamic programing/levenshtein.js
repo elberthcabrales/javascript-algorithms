@@ -49,7 +49,7 @@ function levenshtein(a, b) {
   for (let i = 1; i < dp.length; i++) {
     for (let j = 1; j < dp[i].length; j++) {
       if (a[i - 1] === b[j - 1]) {
-        dp[i][j] = dp[i - 1][j - 1]; // no cost
+        dp[i][j] = dp[i - 1][j - 1]; // substitution without cost
       }
       else{
 

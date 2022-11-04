@@ -39,6 +39,18 @@ class LinkedList {
     }
   }
 
+  printListRecursive() {
+    const printRec = (node) => {
+      if (node === null) {
+        return;
+      }
+      process.stdout.write(String(node.data));
+      process.stdout.write(" -> ");
+      printRec(node.nextElement)
+    }
+    return printRec(this.head)
+  }
+
   getHead() {
     return this.head;
   }
@@ -79,6 +91,7 @@ class LinkedList {
     }
     return false; //value not found
   }
+
   deleteAtHead() {
     //if list is empty, do nothing
     if (this.isEmpty()) {
@@ -93,28 +106,29 @@ class LinkedList {
     return this;
   }
 
-  deleteAtTail(){
+  deleteAtTail() {
     if (this.isEmpty()) {
       return this;
     }
     // create a clone of head like prototype pattern
     let temp = this.head;
 
-    if(temp.nextElement === null){
+    if (temp.nextElement === null) {
       this.head = temp.nextElement;
       return this;
     }
 
-    while (temp.nextElement !== null){
-      if(temp.nextElement.nextElement === null){
+    while (temp.nextElement !== null) {
+      if (temp.nextElement.nextElement === null) {
         temp.nextElement = null;
-      }else{
+      } else {
         temp = temp.nextElement;
       }
     }
     return this;
   }
-  deleteVal(data){
+
+  deleteVal(data) {
     //if list is empty, do nothing
     if (this.isEmpty()) {
       return false;
@@ -122,23 +136,23 @@ class LinkedList {
 
     let temp = this.head;
 
-    if(temp.data === data){
+    if (temp.data === data) {
       this.head = temp.nextElement
       return true;
     }
 
-    while (temp.nextElement !== null){
-      if(temp.nextElement.data === data){
+    while (temp.nextElement !== null) {
+      if (temp.nextElement.data === data) {
         temp.nextElement = temp.nextElement.nextElement
       }
       temp = temp.nextElement
     }
   }
 
-  length(){
+  length() {
     let length = 0;
     let temp = this.head;
-    while (temp !== null){
+    while (temp !== null) {
       length++;
       temp = temp.nextElement
     }
@@ -146,7 +160,7 @@ class LinkedList {
     return length;
   }
 
-  reverse(){
+  reverse() {
     //if list is empty, do nothing
     if (this.isEmpty()) {
       return false;
@@ -156,7 +170,7 @@ class LinkedList {
     let previousNode = null;
     let nextNode = null;
 
-    while (currentNode !== null){
+    while (currentNode !== null) {
       nextNode = currentNode.nextElement; //backup next node before reversing
       currentNode.nextElement = previousNode; // reverse the direction
       previousNode = currentNode // backup currentNode in previousNode don't edit origin reference
@@ -165,7 +179,8 @@ class LinkedList {
     this.head = previousNode;
     return this;
   }
-  findMid(){
+
+  findMid() {
     if (this.isEmpty()) {
       return this;
     }
@@ -176,7 +191,7 @@ class LinkedList {
     if (slower.nextElement == null) {
       return slower;
     }
-    while (slower.nextElement !== null && faster.nextElement !== null && faster.nextElement.nextElement !== null){
+    while (slower.nextElement !== null && faster.nextElement !== null && faster.nextElement.nextElement !== null) {
       slower = slower.nextElement;
       faster = faster.nextElement.nextElement;
     }
@@ -203,7 +218,27 @@ class LinkedList {
     }
     return this;
   }
+
+  removeDuplicates() {
+    if (this.isEmpty()) {
+      return this;
+    }
+    let list = this.head;
+    const set = new Set();
+    set.add(list.data)
+    while (list.nextElement != null) {
+      if (set.has(list.nextElement.data)) {
+        list.nextElement = list.nextElement.nextElement
+      } else {
+        set.add(list.nextElement.data)
+        list = list.nextElement
+      }
+    }
+
+    return list
+  }
 }
+
 // test all methods for LinkedList
 let list = new LinkedList();
 list.insertAtHead(1);
@@ -211,7 +246,7 @@ list.insertAtHead(2);
 list.insertAtHead(3);
 list.insertAtHead(4);
 list.insertAtHead(5);
-list.printList();
+list.printListRecursive();
 list.insertAtTail(6);
 list.insertAtTail(7);
 list.insertAtTail(8);
@@ -242,5 +277,14 @@ console.log(list.findMid())
 // insert duplicated and delete
 list.insertAtHead(6);
 list.printList()
-list.removeDuplicated()
+//before 6 -> 7 -> 6 -> 1 -> 3 -> 4 -> null
+list.removeDuplicates()
+// after 6 -> 7 -> 1 -> 3 -> 4 -> null
 list.printList()
+let list2 = new LinkedList();
+list2.insertAtHead(2);
+list2.insertAtHead(1);
+list2.insertAtHead(1);
+list2.printList()
+list2.removeDuplicated();
+list2.printList()

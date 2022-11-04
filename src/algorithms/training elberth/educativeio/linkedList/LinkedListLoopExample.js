@@ -33,7 +33,6 @@ class LinkedList {
   }
 }
 
-
 let list = new LinkedList();
 
 list.insertAtHead(21);

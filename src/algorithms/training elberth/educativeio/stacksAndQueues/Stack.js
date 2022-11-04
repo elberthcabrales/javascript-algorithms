@@ -29,7 +29,7 @@ class Stack {
       return top;
     }
     this.top = this.items[this.items.length - 2]
-    return this.items.pop();;
+    return this.items.pop();
   }
 }
 
