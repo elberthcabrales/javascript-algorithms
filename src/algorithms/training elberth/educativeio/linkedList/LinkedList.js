@@ -172,7 +172,7 @@ class LinkedList {
 
     while (currentNode !== null) {
       nextNode = currentNode.nextElement; //backup next node before reversing
-      currentNode.nextElement = previousNode; // reverse the direction
+      currentNode.nextElement = previousNprintRecode; // reverse the direction
       previousNode = currentNode // backup currentNode in previousNode don't edit origin reference
       currentNode = nextNode;// use nextNode for prevent edit origin reference
     }

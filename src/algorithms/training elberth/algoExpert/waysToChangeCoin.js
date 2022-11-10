@@ -13,5 +13,6 @@ function numberOfWaysToMakeChange(target, coins) {
   return ways[target];
 }
 
+
 // 1x1 + 5x1 and 6x1 are 2 ways
 numberOfWaysToMakeChange(6, [1, 5]);

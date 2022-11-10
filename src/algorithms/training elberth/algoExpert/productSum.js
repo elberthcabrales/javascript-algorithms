@@ -17,6 +17,7 @@ const sumOfProducts = (array, level = 1) => {
   return sum * level;
 };
 
+// calculated as: 5 + 2 + 2 * (7 - 1) + 3 + 2 * (6 + 3 * (-13 + 8) + 4)
 const arr = [5, 2, [7, -1], 3, [6, [-13, 8], 4]];
 
 productSum(arr);

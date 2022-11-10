@@ -27,6 +27,34 @@ class BST {
     return this;
   }
 
+  /**
+   * insert value
+   *  if value is less than root and left is null, invoke recursive insert
+   *  if value is bigger than root and right is null, invoke recursive insert
+   *  two cases insert in left or right
+   *  then return this
+   *
+   *  remove value
+   * case 1 :
+   *  evaluate value if is smaller than first left use left child recursion invoke remove
+   * case 2:
+   *  evaluate value if is bigger than first right use child recursion invoke remove
+   * case 3:
+   *  value is equal
+   *  if it has parent validate if is equal left or right
+   *     assign to left or right... left or right value
+   *  else no has parent
+   *     add next value and next right or left depending on exist left or right
+   *
+   *  contain value
+   *    if is less than root search in left invoke recursive
+   *      if less is null return false
+   *    if is bigger than root search in right invoke recursive
+   *      if right is null return false
+   *
+   *     then return true
+   */
+
   contains(value) {
     // Write your code here.
     if (value < this.value) {
@@ -34,7 +62,8 @@ class BST {
         return false;
       }
       return this.left.contains(value);
-    } if (value > this.value) {
+    }
+    if (value > this.value) {
       if (this.right === null) {
         return false;
       }
@@ -43,39 +72,6 @@ class BST {
     return true;
   }
 
-  /**
-   *
-   * @param value
-   * @param parent
-   * @returns {BST}
-   * lookup with loop in binary search left or right
-   * if value is found in BST.value
-   *  if node has child left and child right
-   *    replace node value with successor(the smallest item in the right subtree)
-   *    remove replaced node
-   *   //prioriza poner poner el node left si no pone el derecho
-   *  else if value is left node && has parent
-   *            parent.left = this.left !== null ? this.left : this.right;
-   *  else if value is in rigth && has parent
-   *            parent.right = this.left !== null ? this.left : this.right;
-   *  else
-   *   if (parent === null){
-   *         if(this.left !== null) {
-   *           // for skewed left
-   *           this.value = this.left.value;
-   *           this.right = this.left.right;
-   *           this.left = this.left.left;
-   *         }else if (this.right !== null){
-   *           // for skewed right
-   *           this.value = this.right.value; //replace parent with child
-   *           this.left = this.right.left;
-   *           this.right = this.right.right
-   *     }
-   *
-   *
-   *
-   * return BST
-   */
   // here is the most important piece, track always the parent of node
   remove(value, parent = null) {
     if (value < this.value) {
@@ -87,7 +83,7 @@ class BST {
         this.right.remove(value, this);
       }
     } else { // match
-      // has tow children
+      // has two children
       if (this.left !== null && this.right !== null) { // case 1 Deleting a node with tow children
         this.value = this.right.getMinValue();
         this.right.remove(this.value, this);
@@ -129,17 +125,18 @@ const root = new BST(10);
 root.left = new BST(5);
 root.left.left = new BST(2);
 root.left.left.left = new BST(1);
-root.right = new BST(15);
-root.right.left = new BST(13);
-root.right.left.right = new BST(14);
-root.right.left.right.left = new BST(14);
+root.right = new BST(20);
+root.right.left = new BST(15);
+root.right.left.right = new BST(17);
+root.right.left.right.left = new BST(16); //replace
+root.right.left.right.right = new BST(18);
 root.right.right = new BST(22);
 
 // 10,5,2,1,15,13,14,22,12
 root.insert(12);
 assert(root.right.left.left.value, 12);
 
-root.remove(13);
+root.remove(15);
 assert(root.contains(10), false);
 chai.expect(root.value).to.deep.equal(12);
 

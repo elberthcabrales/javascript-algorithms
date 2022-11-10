@@ -44,6 +44,15 @@ class proxyMinStack{
     this.minStack.pop();
     return this.mainStack.pop();
   }
+
+  /**
+   * insert
+   * main = [5,1,4,2]
+   * min  = [5,1,1,1]
+   * pop
+   * main = [5,1] 2-4
+   * min  = [5,1] 1-1
+   */
   //Pushes values into newStack
   push(value) {
     this.mainStack.push(value)
