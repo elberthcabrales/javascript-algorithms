@@ -234,7 +234,7 @@ class LinkedList {
         list = list.nextElement
       }
     }
-
+z
     return list
   }
 }

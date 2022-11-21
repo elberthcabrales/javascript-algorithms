@@ -53,9 +53,11 @@ class maxHeap {
   }
 
   maxHeapify(index) {
+    // is leftIdx*2 because start from middle decreasing 10+1--8+1--6+1--4+1 then here start
     let left = (index * 2) + 1; //left child index
     let right = (index * 2) + 2; //right child index
     let largest = index;
+    //console.log(`left:${left} right: ${right} index: ${index}`)
     //If left child is smaller than root
     if ((this.elements > left) && (this.heap[largest] < this.heap[left])) {
       largest = left
@@ -72,6 +74,7 @@ class maxHeap {
       this.heap[index] = tmp
       this.maxHeapify(largest)
     }
+    //console.log(`largest ${largest}`)
   }
 
   buildHeap(arr){

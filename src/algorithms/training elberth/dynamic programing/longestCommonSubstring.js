@@ -9,7 +9,7 @@ function lcm(strFirst, strSecond){
   for(let i = 1;i <= strFirst.length; i++){
     for(let j = 1; j <= strSecond.length; j++){
       if(strFirst[i-1] === strSecond[j-1]){
-         dp[i][j] = dp[i-1][j-1] + 1
+        dp[i][j] = dp[i-1][j-1] + 1
         maxValue = Math.max(maxValue, dp[i][j])
       }
     }

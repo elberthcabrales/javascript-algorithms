@@ -20,12 +20,12 @@ class LinkedList {
   }
 
   detectLoop(){
-    let one = this.head;
-    let two = this.head;
-    while(one!=null && two!=null && two.nextElement!=null){
-      one = one.nextElement // Moves one node at a time
-      two = two.nextElement.nextElement // Moves two nodes at a time
-      if (one == two){ // Loop exists
+    let slower = this.head;
+    let faster = this.head;
+    while(slower!=null && faster!=null && faster.nextElement!=null){
+      slower = slower.nextElement // Moves one node at a time
+      faster = faster.nextElement.nextElement // Moves two nodes at a time
+      if (slower == faster){ // Loop exists
         return true;
       }
     }

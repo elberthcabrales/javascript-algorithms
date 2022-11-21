@@ -1,30 +1,34 @@
-function solveKnapsack(weights, prices, capacity, index) {
-  // base case of when we have run out of capacity or objects
-  if (capacity <= 0 || index >= weights.length) {
-    return 0;
+let solveKnapsack = function(profits, weights, capacity) {
+  const dp = new Array(capacity).fill(0);
+  const numberOfArticles = profits.length;
+
+  //  base case, sum only one element without combinations
+  for(let amount = 1; amount <= capacity; amount++){
+    if(weights[0]<=amount){
+      dp[amount-1] = profits[0]
+    }
   }
-  // if weight at index-th position is greater than capacity, skip this object
-  if (weights[index] > capacity) {
-    return solveKnapsack(weights, prices, capacity, index + 1);
+
+  for(let idx = 1; idx < numberOfArticles; idx++){
+    const valueArticle = profits[idx];
+    const weightArticle = weights[idx];
+    for(let c = 1; c <= capacity; c++){
+      if(weightArticle <= c) {
+        let profit = valueArticle;
+        const diff = c - weightArticle;
+        if(diff < weightArticle && diff > 0){
+          profit += dp[c - weightArticle];
+        }
+
+        dp[c] = Math.max(profit, dp[c - 1])
+      }
+    }
+    console.log(dp)
   }
 
-  // recursive call, either we can include the index-th object or we cannot
-  // we check both possibilities and return the most optimal one using max
-  return Math.max( // this sum price because decrease capacity with current weights
-    prices[index] + solveKnapsack(weights, prices, capacity - weights[index], index + 1),
-    solveKnapsack(weights, prices, capacity, index + 1),
-  );
-}
+  return dp[capacity]
+};
 
-function knapsack(weights, prices, capacity) {
-  return solveKnapsack(weights, prices, capacity, 0);
-}
-
-const weights = [2, 1, 1, 3];
-const prices = [2, 8, 1, 10];
-const capacity = 4;
-const expected = 18;
-
-const result = knapsack(weights, prices, capacity);
-
-console.log(result);
+const profits = [1, 6, 10, 16];
+const weights = [1, 2, 3, 5];
+console.log(`Total knapsack profit: ---> ${solveKnapsack(profits, weights, 7)}`); // expected 22
